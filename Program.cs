@@ -60,7 +60,6 @@ class Program
             {
                 switch (op)
                 {
-                    //COment
                     case 1:
                         Console.WriteLine(IntroductionMessageC1);
                         string playerName = Console.ReadLine();
