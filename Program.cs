@@ -58,7 +58,6 @@ class Program
 
             if (validInput)
             {
-                //comment
                 switch (op)
                 {
                     case 1:
