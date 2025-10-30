@@ -104,7 +104,7 @@ class Program
                             Console.WriteLine();
                         }
                         else
-                        {
+            {
                             Console.WriteLine(TrainingResultMessageC1_4);
                             Thread.Sleep(1000);
                             Console.WriteLine();
@@ -120,4 +120,5 @@ class Program
 
         } while (op != 0);
     }
+
 }
