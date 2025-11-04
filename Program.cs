@@ -22,12 +22,20 @@ class Program
         const string MageLevel2 = "Necromancer";
         const string MageLevel3 = "Elarion of flames";
         const string MageLevel4 = "Demise of Inferno";
+        const string IntroductionMessageC2 = "Now you have to go to the dragon's cave and kill it!";
+        const string DoorClosedMessage = "You have in front of you a door, what's the secret code? You have 3 tries";
+        const string DoorOpenedMessage = "The dragon respects you. You have Unlocked the next level";
+        const string AllDoorsOpenedMessage = "You have unlocked the final level. Be prepared for the final battle!";
 
         int op = 0;
         int power = 0;
         int randNum;
         bool validInput;
         var rand = new Random();
+        int secretCode;
+        int counter;
+        int codeInput;
+        bool correctCode;
 
         do
         {
@@ -113,6 +121,59 @@ class Program
                             Console.WriteLine();
                         }
                         break;
+                    case 2:
+                        correctCode = false;
+                        counter = 3;
+                        Console.WriteLine(IntroductionMessageC2);
+                        while(counter > 0 && correctCode == false)
+                        {
+                            secretCode = rand.Next(1, 6);
+                            Console.WriteLine(DoorClosedMessage);
+                            codeInput = Convert.ToInt32(Console.ReadLine());
+                            if(secretCode == codeInput)
+                            {
+                                counter = 3;
+                                secretCode = rand.Next(1, 6);
+                                Console.WriteLine(DoorOpenedMessage);
+                                while (counter > 0 && correctCode == false)
+                                { 
+                                    Console.WriteLine(DoorClosedMessage);
+
+                                    codeInput = Convert.ToInt32(Console.ReadLine());
+                                    if (secretCode == codeInput)
+                                    {
+                                        counter = 3;
+                                        secretCode = rand.Next(1, 6);
+                                        Console.WriteLine(DoorOpenedMessage);
+                                        while (counter > 0 && correctCode == false)
+                                        {
+                                            Console.WriteLine(DoorClosedMessage);
+
+                                            codeInput = Convert.ToInt32(Console.ReadLine());
+                                            if (secretCode == codeInput)
+                                            {
+                                                correctCode = true;
+                                                Console.WriteLine(AllDoorsOpenedMessage);
+                                            }
+                                            else
+                                            {
+                                                counter--;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        counter--;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                counter--;
+                            }
+                        }
+                        break;
+
                 }
             }
 
