@@ -12,7 +12,9 @@ class Program
         const string MenuPrompt = "Choose an option (1-3) - (0) to exit: ";
         const string InputErrorMessage = "Invalid input. Please enter a number between 0 and 3.";
         const string IntroductionMessageC1 = "Hey you! You're finally awake. Rise and shine! Its your first day in the academy. You will learn about the arcane arts and alchemy. But first things first, what's your name?";
+        const string WelcomeMessage = "Welcome to the academy, {0}!";
         const string TrainingMessageC1 = "Alright! Let's go. Before you can go outside the academy, you must train your mind and spells. So you will need to meditate for 5 days. I recommend you do it from 1 to 10 hours, the choice is yours. See you in five days. Good luck!";
+        const string MeditationMessage = "Today I meditated for {0} hours! My power might increase to {1}!";
         const string TrainingCompleteMessageC1 = "Hello! I came back to see how you are doing and evaluate your power. Let me see through your soul...";
         const string TrainingResultMessageC1_1 = "Wow, I'm surpirsed, I've seen scarecrows with more power than you. You need to leave the academy because your range is...";
         const string TrainingResultMessageC1_2 = "Now, that's progress, it's small though. By now you only can summon little familiars or throw a couple of embers. Your range shall be...";
@@ -22,12 +24,28 @@ class Program
         const string MageLevel2 = "Necromancer";
         const string MageLevel3 = "Elarion of flames";
         const string MageLevel4 = "Demise of Inferno";
+        const string IntroductionMessageC2 = "Now you have to go to the dragon's cave and kill it!";
+        const string DoorClosedMessage = "You have in front of you a door, what's the secret code? You have 3 tries";
+        const string DoorOpenedMessage = "The dragon respects you. You have Unlocked the next level";
+        const string AllDoorsOpenedMessage = "You have unlocked the final level. Be prepared for the final battle!";
+        const string ErrorMessageC2 = "Error, you have to put an integer number between 1 and 5";
+        const string IntroductionMessageC3 = "Congratulations, You are a true Dragonslayer. Now, you are in front of a bitcoin mine. You have to dig and collect the bitcoins, but maybe you will find no bitcoins, so be careful! ";
+        const string NotFoundBitcoins = "Today's not your lucky day, you found 0 bitcoins";
+        const string EnoughBitcoins = "You’ve unlocked the gold GPU! Your spells now run at 120 FPS!";
+        const string NotEnoughBitcoins = "Your magic card is still integrated. It's time to defeat another dragon!";
+        const string MsgBitcoins = "Nice! You found {0} bitcoins";
 
         int op = 0;
         int power = 0;
         int randNum;
         bool validInput;
         var rand = new Random();
+        int secretCode;
+        int counter;
+        int codeInput;
+        bool correctCode;
+        int bitcoinCounter;
+        int bitcoinFound;
 
         do
         {
@@ -63,7 +81,7 @@ class Program
                     case 1:
                         Console.WriteLine(IntroductionMessageC1);
                         string playerName = Console.ReadLine();
-                        Console.WriteLine($"Welcome to the academy, {playerName}!");
+                        Console.WriteLine(WelcomeMessage, playerName);
                         Thread.Sleep(1000);
                         Console.WriteLine(TrainingMessageC1);
                         Thread.Sleep(3000);
@@ -71,7 +89,7 @@ class Program
                         {
                             randNum = rand.Next(1, 16);
                             power += rand.Next(1, 11);
-                            Console.WriteLine($"Today I meditated for {randNum} hours! My power might increase to {power}!");
+                            Console.WriteLine(MeditationMessage, randNum, power);
                             Thread.Sleep(1000);
                         }
                         Console.WriteLine(TrainingCompleteMessageC1);
@@ -113,6 +131,117 @@ class Program
                             Console.WriteLine();
                         }
                         break;
+                    case 2:
+                        correctCode = false;
+                        codeInput = 0;
+                        counter = 3;
+                        Console.WriteLine(IntroductionMessageC2);
+                        while(counter > 0 && correctCode == false)
+                        {
+                            secretCode = rand.Next(1, 6);
+                            Console.WriteLine(DoorClosedMessage);
+                            try
+                            {
+                                codeInput = Convert.ToInt32(Console.ReadLine());
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine(ErrorMessageC2);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine(ErrorMessageC2);
+                            }
+                            if(secretCode == codeInput)
+                            {
+                                counter = 3;
+                                secretCode = rand.Next(1, 6);
+                                Console.WriteLine(DoorOpenedMessage);
+                                while (counter > 0 && correctCode == false)
+                                { 
+                                    Console.WriteLine(DoorClosedMessage);
+                                    try
+                                    {
+                                        codeInput = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                    catch (FormatException)
+                                    {
+                                        Console.WriteLine(ErrorMessageC2);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        Console.WriteLine(ErrorMessageC2);
+                                    }
+                                    if (secretCode == codeInput)
+                                    {
+                                        counter = 3;
+                                        secretCode = rand.Next(1, 6);
+                                        Console.WriteLine(DoorOpenedMessage);
+                                        while (counter > 0 && correctCode == false)
+                                        {
+                                            Console.WriteLine(DoorClosedMessage);
+                                            try
+                                            {
+                                                codeInput = Convert.ToInt32(Console.ReadLine());
+                                            }
+                                            catch (FormatException)
+                                            {
+                                                Console.WriteLine(ErrorMessageC2);
+                                            }
+                                            catch (Exception)
+                                            {
+                                                Console.WriteLine(ErrorMessageC2);
+                                            }
+                                            if (secretCode == codeInput)
+                                            {
+                                                correctCode = true;
+                                                Console.WriteLine(AllDoorsOpenedMessage);
+                                            }
+                                            else
+                                            {
+                                                counter--;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        counter--;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                counter--;
+                            }
+                        }
+                        break;
+                    case 3:
+                        bitcoinCounter = 0;
+                        Console.WriteLine(IntroductionMessageC3);
+                        for (int i = 0; i < 5; i++)
+                        {
+                            bitcoinFound = rand.Next(0, 51);
+                            Console.WriteLine(MsgBitcoins, bitcoinFound);
+                            if(bitcoinFound >= 5)
+                            {
+                                bitcoinCounter += bitcoinFound;
+                                Thread.Sleep(1000);
+                            }
+                            else
+                            {
+                                Console.WriteLine(NotFoundBitcoins);
+                                Thread.Sleep(1000);
+                            }
+                        }
+                        if (bitcoinCounter > 200)
+                        {
+                            Console.WriteLine(EnoughBitcoins);
+                        }
+                        else
+                        {
+                            Console.WriteLine(NotEnoughBitcoins);
+                        }
+                        break;
 
                 }
             }
@@ -122,3 +251,4 @@ class Program
     }
 
 }
+
