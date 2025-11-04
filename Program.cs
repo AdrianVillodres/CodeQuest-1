@@ -69,8 +69,8 @@ class Program
                         Thread.Sleep(3000);
                         for (int ctr = 0; ctr <= 4; ctr++)
                         {
-                            randNum = rand.Next(1, 11);
-                            power += randNum;
+                            randNum = rand.Next(1, 16);
+                            power += rand.Next(1, 11);
                             Console.WriteLine($"Today I meditated for {randNum} hours! My power might increase to {power}!");
                             Thread.Sleep(1000);
                         }
