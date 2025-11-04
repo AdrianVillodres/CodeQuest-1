@@ -26,6 +26,7 @@ class Program
         const string DoorClosedMessage = "You have in front of you a door, what's the secret code? You have 3 tries";
         const string DoorOpenedMessage = "The dragon respects you. You have Unlocked the next level";
         const string AllDoorsOpenedMessage = "You have unlocked the final level. Be prepared for the final battle!";
+        const string ErrorMessageC2 = "Error, you have to put an integer number between 1 and 5";
 
         int op = 0;
         int power = 0;
@@ -123,13 +124,25 @@ class Program
                         break;
                     case 2:
                         correctCode = false;
+                        codeInput = 0;
                         counter = 3;
                         Console.WriteLine(IntroductionMessageC2);
                         while(counter > 0 && correctCode == false)
                         {
                             secretCode = rand.Next(1, 6);
                             Console.WriteLine(DoorClosedMessage);
-                            codeInput = Convert.ToInt32(Console.ReadLine());
+                            try
+                            {
+                                codeInput = Convert.ToInt32(Console.ReadLine());
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine(ErrorMessageC2);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine(ErrorMessageC2);
+                            }
                             if(secretCode == codeInput)
                             {
                                 counter = 3;
@@ -138,8 +151,18 @@ class Program
                                 while (counter > 0 && correctCode == false)
                                 { 
                                     Console.WriteLine(DoorClosedMessage);
-
-                                    codeInput = Convert.ToInt32(Console.ReadLine());
+                                    try
+                                    {
+                                        codeInput = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                    catch (FormatException)
+                                    {
+                                        Console.WriteLine(ErrorMessageC2);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        Console.WriteLine(ErrorMessageC2);
+                                    }
                                     if (secretCode == codeInput)
                                     {
                                         counter = 3;
@@ -148,8 +171,18 @@ class Program
                                         while (counter > 0 && correctCode == false)
                                         {
                                             Console.WriteLine(DoorClosedMessage);
-
-                                            codeInput = Convert.ToInt32(Console.ReadLine());
+                                            try
+                                            {
+                                                codeInput = Convert.ToInt32(Console.ReadLine());
+                                            }
+                                            catch (FormatException)
+                                            {
+                                                Console.WriteLine(ErrorMessageC2);
+                                            }
+                                            catch (Exception)
+                                            {
+                                                Console.WriteLine(ErrorMessageC2);
+                                            }
                                             if (secretCode == codeInput)
                                             {
                                                 correctCode = true;
